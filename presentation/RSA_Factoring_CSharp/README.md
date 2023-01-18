@@ -20,8 +20,7 @@ y
 Author: Nathan Gaillard
 
 ## Sources
-Inspired from the exercise solution and Python implementation
-
+https://eprint.iacr.org/2012/064.pdf
 https://stackoverflow.com/questions/27383623/c-sharp-get-public-key-from-modulus-and-exponent
 https://stackoverflow.com/questions/36913069/how-to-get-specific-value-from-a-xml-string-in-c-sharp
              
