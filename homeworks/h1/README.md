@@ -55,5 +55,11 @@ To exit and shutdown the machine run the command *shutdown* with the right privi
 - Used Firefox Dev tools to call the phoneHome() function and found the answer in the console
 - Found the "network" request and the field networkNum in it.
 
+## n) Voluntary bonus: Banditry. Solve Over the Wire: Bandit 5-7.
+- Level 5: Found password in file inhere/-file07 using *cat <-file07*
+- Level 6: Found password in file inhere/maybehere07/.file2 using *find -size 1033c*. This finds all files of size 1033 bytes. It is a hidden file!
+- Level 7: Found password in /var/lib/dpkg/info/bandit7.password using *find -size 33c -user bandit7 -group bandit6 -type f*
+
+
 
 
