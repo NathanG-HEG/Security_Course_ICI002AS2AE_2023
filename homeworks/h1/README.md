@@ -19,3 +19,25 @@ ssh -p 2220 bandit0@bandit.labs.overthewire.org
 - Level 2: Logged in as bandit2 using the password stored in the - file (Read it with *cat <-*)
 - Level 3: Logged in as bandit3 using the password stored in 'spaces in this filename' (Read it with *cat spaces\ in\ this\ filename*)
 - Level 4: Logged in as bandit4 using the password stored in ~/inhere/.hidden (Read it with *cat inhere/.hidden*, find it with *ls -a inhere*)
+
+## b) Bullseye. Install Debian 11-Bullseye virtual machine in VirtualBox. (See also: Karvinen 2021: Install Debian on VirtualBox)
+1. Download Debian image, I chose GNOME GUI, but it doesn't really matter.
+2. Download and install Oracle VirtualBox.
+4. Create a new Virtual machine in VBox, I set 4Gb of memory, 32Gb of virtual disk, and 2 CPU.
+3. Add the image to the Storage devices manager in the VM settings.
+4. Choose Debian Graphical installer or Live install
+5. Here I can not go further as I cannot virtualize Debian with Microsoft Hyper-V
+
+I will use Kali as I have it already prepared in both VBox and WSL 2.0. I will demonstrate instead how to log in via ssh to an headless VM.
+1. Create a port forwading rule in your VM's NAT network card settings (Go to advanced).
+2. The rule should be as follow Name: any; protocol: TCP; Host IP: can be let empty; Host port: any high port; Guest IP: can be let empty; Guest port: 22.
+3. Start the VM and make sure OpenSSH is installed and running *sudo systemctl status ssh*
+3. If the program is not installed run *sudo apt install openssh-server*
+3. If the program is not active run *sudo systemctl enable ssh --now*
+3. Start the VM in headless mode by clicking on *Headless start*
+4. Connect to the VM via SSH with the following command:
+```shell
+ssh -p $choosen_host_port $username@localhost
+```
+
+To exit and shutdown the machine run the command *shutdown* with the right privilege.
