@@ -60,6 +60,12 @@ To exit and shutdown the machine run the command *shutdown* with the right privi
 - Level 6: Found password in file inhere/maybehere07/.file2 using *find -size 1033c*. This finds all files of size 1033 bytes. It is a hidden file!
 - Level 7: Found password in /var/lib/dpkg/info/bandit7.password using *find -size 33c -user bandit7 -group bandit6 -type f*
 
+## o) Voluntary bonus: My fundaments. What do you consider the fundamentals of security? What would you teach the first day?
+I think the CIA triade is a good point and should be discussed more, I think that if you don't know what the teacher is talking about, you mostly hear a lot of
+concpets you may have heard about before but do not truly understand. I would not start with example of attacks, tools, etc, as levels in class vary greatyl.
+
+## p) Voluntary bonus: Johnny Tables. Solve Webgoat: A1 Injection (intro).
+
 
 
 
