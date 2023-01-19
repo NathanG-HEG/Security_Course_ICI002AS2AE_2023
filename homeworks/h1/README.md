@@ -41,3 +41,19 @@ ssh -p $choosen_host_port $username@localhost
 ```
 
 To exit and shutdown the machine run the command *shutdown* with the right privilege.
+
+## c) WebGoat. Install WebGoat practice target. (See also: Karvinen 2021: Install Webgoat 8 - Learn Web Pentesting)
+- Did not need to install JRE as my Kali already have OpenJDK 17
+- Downloaded the packaged Java app from terokarvinen.com
+- Started the server with *java -jar blabla.jar*
+- Connected to http://localhost:8080/WebGoat/login via the browser and created my user.
+
+## d) Hacker warmup. Solve these tasks on WebGoat
+### General: HTTP Basics
+- Found the magic number by checking the header request when submiting the form
+### General: Developer tools
+- Used Firefox Dev tools to call the phoneHome() function and found the answer in the console
+- Found the "network" request and the field networkNum in it.
+
+
+
