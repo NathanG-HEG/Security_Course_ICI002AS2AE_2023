@@ -1,8 +1,15 @@
 # Homework 1 - First steps
 ## x) Read and summarize. (This subtask x does not require tests with a computer. Some bullets per article is enough for your summary)
 ### Hutchins et al 2011: Intelligence-Driven Computer Network Defense Informed by Analysis of Adversary Campaigns and Intrusion Kill Chains, chapters Abstract, 3.2 Intrusion Kill Chain and 3.3 Courses of Action
-- Hello
-- Hello
+This bullet point summary does not replace reading the (article)[https://lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf] and doesn't go into details
+- Advanced Persitent Threat (APT) are intrusion campaigns from well-resourced adversaries to defeat most conventional defense mechanism
+- APT are more or less opposed to automated viruses
+- Intelligence-driven response is a continuous process consisting of recognizing repetious attack and implementing countermeasures fast by leveraging attacks' investigation results
+- Indicators may be **Atomic**, **computed**, **behavioral** (logic)
+- Intrusion (or cyber) kill chain is a breakdown of a computer network attack in seven phases (see [Lockheed Martin](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html))
+- Kill chain analysis often shows that defenders are late to the party
+- Campaign analysis watch for common indicators in kill chain analysis results
+
 ### Karvinen 2020: Command Line Basics Revisited
 - reviewed shell command line
 - use command tool to navigate the file system,
