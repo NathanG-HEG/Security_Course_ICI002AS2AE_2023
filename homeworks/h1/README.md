@@ -33,9 +33,9 @@ ssh -p 2220 bandit0@bandit.labs.overthewire.org
 4. Create a new Virtual machine in VBox, I set 4Gb of memory, 32Gb of virtual disk, and 2 CPU.
 3. Add the image to the Storage devices manager in the VM settings.
 4. Choose Debian Graphical installer or Live install
-5. Here I can not go further as I cannot virtualize Debian with Microsoft Hyper-V
+5. Here I can not go further as I cannot virtualize Debian with Microsoft Hyper-V (somehow?)
 
-I will use Kali as I have it already prepared in both VBox and WSL 2.0. I will demonstrate instead how to log in via ssh to an headless VM.
+I will use Kali as I have it already ready in both VBox and WSL 2.0. I will demonstrate instead how to log in via ssh to an headless VM.
 1. Create a port forwading rule in your VM's NAT network card settings (Go to advanced).
 2. The rule should be as follow Name: any; protocol: TCP; Host IP: can be let empty; Host port: any high port; Guest IP: can be let empty; Guest port: 22.
 3. Start the VM and make sure OpenSSH is installed and running *sudo systemctl status ssh*
@@ -68,8 +68,8 @@ To exit and shutdown the machine run the command *shutdown* with the right privi
 - Level 7: Found password in /var/lib/dpkg/info/bandit7.password using *find -size 33c -user bandit7 -group bandit6 -type f*
 
 ## o) Voluntary bonus: My fundaments. What do you consider the fundamentals of security? What would you teach the first day?
-I think the CIA triade is a good point and should be discussed more, I think that if you don't know what the teacher is talking about, you mostly hear a lot of
-concpets you may have heard about before but do not truly understand. I would not start with example of attacks, tools, etc, as levels in class vary greatyl.
+I think the CIA triade is a good point and should be discussed more, I however think that if you don't know what the teacher is talking about, you mostly hear a lot of
+concpets you may have heard about before but do not truly understand. I would not start with example of attacks, tools, etc, as levels in class vary greatly.
 
 ## p) Voluntary bonus: Johnny Tables. Solve Webgoat: A1 Injection (intro).
 ### SQL Injection intro
