@@ -43,7 +43,7 @@ idn.icann.org/日本語日本語日本語日本語日本語日本語日本語日
 This attack has no impact on the service apart from availability. However it is extremely simple to execute.
 
 
-## a) Sequel. Solve SQLZoo: 
+## a) Sequel. Solve [SQLZoo](https://sqlzoo.net/wiki/SQL_Tutorial): 
 
 ### 0 SELECT basics
 1.
@@ -132,6 +132,40 @@ AND name NOT LIKE '% %';
 Solution in [homework 1](../h1/README.md#sql-injection-intro)
 
 ## m) Voluntary bonus: Pick your tasks from SQLZoo 1, 3-9.
+3.
+```SQL
+SELECT name FROM world WHERE name LIKE '%X%';
+```
+
+4.
+```SQL
+SELECT name FROM world WHERE name LIKE '%land';
+```
+
+5.
+```SQL
+SELECT name FROM world WHERE name LIKE 'C%ia';
+```
+
+6.
+```SQL
+SELECT name FROM world WHERE name LIKE '%oo%';
+```
+
+7.
+```SQL
+SELECT name FROM world WHERE name LIKE '%a%a%a%';
+```
+
+8.
+```SQL
+SELECT name FROM world WHERE name LIKE '_t%';
+```
+
+9.
+```SQL
+SELECT name FROM world WHERE name LIKE '%o__o%';
+```
 
 ## n) Voluntary difficult bonus: WebGoat: SQL Injection (advanced).
 
