@@ -175,6 +175,8 @@ SELECT name FROM world WHERE name LIKE '%o__o%';
 ```
 
 ## n) Voluntary difficult bonus: WebGoat: SQL Injection (advanced).
+- Found Dave's password using *Dave'; SELECT * FROM user_system_data WHERE '1' = '1'* as name parameter.
+- No idea how to log in as Tom
 
 ## o) Voluntary difficult bonus: Install a relational database, show CRUD operations using SQL
 Exercise done on Debian.
