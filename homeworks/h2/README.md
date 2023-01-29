@@ -170,6 +170,57 @@ SELECT name FROM world WHERE name LIKE '%o__o%';
 ## n) Voluntary difficult bonus: WebGoat: SQL Injection (advanced).
 
 ## o) Voluntary difficult bonus: Install a relational database, show CRUD operations using SQL
+Exercise done on Debian.
+
+**Installation**
+1. Install newest package *sudo apt update*
+1. Downlaod MySql *wget https://dev.mysql.com/get/mysql-apt-config_0.8.24-1_all.deb*
+1. Install the deb file *sudo dpkg -i mysql-apt-config_0.8.24-1_all.deb*
+1. Click "OK"
+1. Update the APT repo *sudo apt-get update*
+1. Install the SQL server *sudo apt-get install mysql-community-server*
+1. Choose "Use legacy authentication method"
+1. Check that mySql is active *sudo systemctl status mysql*
+
+**CRUD Operations**
+1. Connect as root using *mysql -u root -p*
+2. Create a new database *CREATE DATABASE music;*
+3. Switch to music database *USE music;*
+4. Create a table songs
+```SQL
+CREATE TABLE songs
+(
+  id              INT unsigned NOT NULL AUTO_INCREMENT,
+  name            VARCHAR(150) NOT NULL,
+  duration        VARCHAR(150) NOT NULL,
+  PRIMARY KEY     (id)
+);
+```
+5. **C**reate data
+```SQL
+INSERT INTO songs (name, duration_s) VALUES
+    ('Here Comes The Sun', 185),
+    ('Nobody Home', 203),
+    ('Layla', 434);
+```
+6. **R**ead data
+```SQL
+SELECT * FROM songs;
+```
+7. **U**pdate data
+```SQL
+UPDATE songs SET name = 'Too long for the radio' WHERE duration_s > 300;
+```
+Check your results.
+
+8. **D**elete data
+```SQL
+DELETE FROM songs WHERE name = 'Too long for the radio';
+```
+Check your results.
+
+Sources: [https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing](https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
+
 
 ## q) Voluntary difficult bonus: Demonstrate aggregate functions (SUM, COUNT) with your own data you created in the previous step.
 
