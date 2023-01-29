@@ -29,6 +29,19 @@
 ### Any episode from Darknet Diaries.
 
 ### Pick a CVE, and briefly explain it & why it matters
+**[CVE-2022-41323](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41323)**
+
+*In Django 3.2 before 3.2.16, 4.0 before 4.0.8, and 4.1 before 4.1.2, internationalized URLs were subject to a potential denial of service attack via the locale parameter, which is treated as a regular expression.*
+
+Local parameters in url treated by Django < 3.2.16 were treated as a regex, meaning that a very long parameter could utilize a lot of CPU resources and cause a denial of service. International URL means translating an url in native language script into ascii text.
+
+E.g attack
+```
+日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語日本語.idn.icann.org
+```
+
+This attack has no impact on the service apart from availability. However it is extremely simple to execute.
+
 
 ## a) Sequel. Solve SQLZoo: 
 
@@ -116,6 +129,7 @@ AND name NOT LIKE '% %';
 ## b) Injected. Solve WebGoat:
 
 ### A1 Injection (intro)
+Solution in [homework 1](../h1/README.md#sql-injection-intro)
 
 ## m) Voluntary bonus: Pick your tasks from SQLZoo 1, 3-9.
 
