@@ -227,16 +227,44 @@ Sources: [https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-star
 
 Show how long it would take to play all the songs in the database.
 ```SQL
-SELECT SUM(duration_s) as total_duration FROM songs;
+SELECT SUM(duration_s) AS total_duration FROM songs;
 ```
 
 **COUNT**
 
 Show how many songs are in the database.
 ```SQL
-SELECT COUNT(id) as number_of_songs FROM songs;
+SELECT COUNT(id) AS number_of_songs FROM songs;
 ```
 
 ## p) Voluntary difficult bonus: Install a practice target for SQL injections, exploit it.
 
 ## r) Voluntary difficult bonus: Demonstrate JOIN with your own database
+First create a new table.
+```SQL
+CREATE TABLE artists
+(
+  id              INT unsigned NOT NULL AUTO_INCREMENT,
+  name            VARCHAR(250) NOT NULL,
+  PRIMARY KEY     (id)
+);
+```
+Alter the songs table to add a reference to the artists table.
+```SQL
+ALTER TABLE songs ADD COLUMN artist_id INT;
+
+ALTER TABLE songs ADD FOREIGN KEY (artist_id) REFERENCES artists(id);
+```
+Add artists to the artists table.
+```SQL
+INSERT INTO artists (name) VALUES ('Pink Floyd'), ('The Beatles');
+```
+Link songs to artists.
+```SQL
+UPDATE songs SET artist_id = 2 WHERE name = 'Here Comes The Sun';
+UPDATE songs SET artist_id = 1 WHERE name = 'Nobody Home';
+```
+Make a selection with join to see the songs and the related artists.
+```SQL
+SELECT songs.name AS song, artists.name AS artist FROM songs LEFT JOIN artists ON artist_id = artists.id;
+```
