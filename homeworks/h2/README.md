@@ -223,6 +223,19 @@ Sources: [https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-star
 
 
 ## q) Voluntary difficult bonus: Demonstrate aggregate functions (SUM, COUNT) with your own data you created in the previous step.
+**SUM**
+
+Show how long it would take to play all the songs in the database.
+```SQL
+SELECT SUM(duration_s) as total_duration FROM songs;
+```
+
+**COUNT**
+
+Show how many songs are in the database.
+```SQL
+SELECT COUNT(id) as number_of_songs FROM songs;
+```
 
 ## p) Voluntary difficult bonus: Install a practice target for SQL injections, exploit it.
 
