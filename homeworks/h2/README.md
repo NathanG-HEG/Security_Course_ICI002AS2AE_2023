@@ -209,13 +209,16 @@ SELECT * FROM songs;
 ```
 7. **U**pdate data
 ```SQL
-UPDATE songs SET name = 'Too long for the radio' WHERE duration_s > 300;
+UPDATE songs
+    SET name = 'Too long for the radio'
+    WHERE duration_s > 300;
 ```
 Check your results.
 
 8. **D**elete data
 ```SQL
-DELETE FROM songs WHERE name = 'Too long for the radio';
+DELETE FROM songs
+    WHERE name = 'Too long for the radio';
 ```
 Check your results.
 
@@ -266,5 +269,7 @@ UPDATE songs SET artist_id = 1 WHERE name = 'Nobody Home';
 ```
 Make a selection with join to see the songs and the related artists.
 ```SQL
-SELECT songs.name AS song, artists.name AS artist FROM songs LEFT JOIN artists ON artist_id = artists.id;
+SELECT songs.name AS song, artists.name AS artist
+    FROM songs
+    LEFT JOIN artists ON artist_id = artists.id;
 ```
