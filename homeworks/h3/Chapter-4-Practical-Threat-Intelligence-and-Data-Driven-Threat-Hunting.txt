@@ -1,0 +1,358 @@
+Chapter 4: Mapping the Adversary
+
+As we've explained previously, there is no threat hunting without good threat intelligence. Depending on the structure and the resources of your organization, you may have some threat intelligence reports that have already been processed for you. But either because you don't have a specialized intelligence team, or because you want to carry out some investigations by yourself, you need to know how to work with the MITRE ATT&CK Framework so that you can map your own intelligence reports.
+
+In this chapter, we're going to cover the following topics:
+
+    The ATT&CK Framework
+    Mapping with ATT&CK
+    Testing yourself
+
+Let's get started!
+Technical requirements
+
+For this chapter, you will need access to the MITRE ATT&CK Matrix: https://attack.mitre.org/.
+The ATT&CK Framework
+
+The ATT&CK Framework is a descriptive model used to label and study the activities that a threat actor is capable of carrying out in order to get a foothold and operate inside an enterprise environment, a cloud environment, smartphones, or even industrial control systems.
+
+The magic behind the ATT&CK Framework is that it provides a common taxonomy for the cybersecurity community to describe adversary behaviors. It works as a common language that both offensive and defensive researchers can use to better understand each other and to better communicate with people not specialized in the field.
+
+And on top of that, you can not only use it as you see fit, but you can also build on top of it, creating your own set of tactics, techniques, and procedures (TTPs). Later on, you can share them with the ATT&CK team by following their guidelines: https://attack.mitre.org/resources/contribute/.
+
+Now, let's take a closer look at the framework by understanding the 14 tactics that it uses. We will then learn how to navigate through the ATT&CK Matrix.
+Tactics, techniques, sub-techniques, and procedures
+
+There are 14 tactics that are used to encompass different sets of techniques. Each tactic represents a tactical goal; that is, the reason why the threat actor is showing a specific behavior.
+
+Let's review the ATT&CK enterprise's tactics:
+
+    Reconnaissance: This technique describes the act of gathering as much information as possible about the victim(s) of the adversary's operations.
+    Resource Development: This technique tries to cover the process of assessing the resources that the adversary uses. It could be purchased, developed, or even stolen resources that are going to be used to support their operations.
+
+    These two tactics were recently added by the ATT&CK team when they fused the Pre-ATT&CK Matrix with the Enterprise Matrix. Both tactics reference steps that the adversary could perform in preparation for the attack and that they will leverage in order to help themselves in the future stages. Throughout this book, we are going to focus on the other 12 tactics that reference behaviors that can be seen once the adversary breaches the victim's environment.
+    Initial Access: This technique describes how the threat actor gets a foothold in the network using different entry vectors. We could say that this would be the threat actor's very first step into the victim's environment.
+    Execution: The act of running malicious code inside the victim's environment. These techniques are usually used to achieve other goals, such as escalating privileges or exfiltrating information.
+    Persistence: With the techniques that fall into this category, the threat actor is capable of remaining inside the system, even after it has been shut down or rebooted. Achieving persistence is one of the main goals of the threat actor once they've penetrated the system.
+    Privilege Escalation: Sometimes, the threat actors get inside the enterprise network through an unprivileged account and in order to carry out further action, they have to elevate their level of access.
+    Defense Evasion: This technique refers to all actions involved in avoiding being detected by the victim's defenses. This can involve a wide range of techniques, including installing and uninstalling software or trying to remove their traces from the system.
+    Credential Access: Sometimes, the threat actor tries to steal legitimate user credentials in order to gain access to systems, create more accounts, or disguise their activity as legitimate activity that's been carried out by a legitimate user.
+    Discovery: This tactic is used to group all the activity that the threat actor does to gain knowledge about how the victim's environment is constituted.
+    Lateral Movement: To move laterally, the threat actor usually has to discover how the network and systems are configured. After, the threat actor can try to pivot from one system to another until they reach their target.
+    Collection: This tactic refers to the act of gathering information from the victim's environment so that they can exfiltrate it later.
+    Command and Control: This tactic describes any techniques involving the threat actor communicating with the systems under its control.
+    Exfiltration: This technique refers to the act of stealing (exfiltrating) information while trying to remain undetected. This technique could include defense methods such as encryption and different types of exfiltration media and protocols.
+    Impact: All attempts to prevent the victim from accessing his/her system, including manipulating or destroying it, fall under this tactic.
+
+Each of these tactics is composed of a set of techniques that describe specific threat actor behaviors. Recently, on March 31, 2020, ATT&CK reshaped the framework in order to merge some techniques into broader categories or to divide techniques with a huge scope into a set of more specific ones. This fixed some overlapping between techniques, the different sizes of scopes among them, and also improved the granularity that could be accomplished with the sub-technique system. At the time of writing this book, there are 183 techniques and around 372 sub-techniques. You can learn more about the ATT&CK Framework's design in the team's paper on the subject: MITRE ATT&CK: Design and Philosophy (https://attack.mitre.org/docs/ATTACK_Design_and_Philosophy_March_2020.pdf).
+
+Finally, the procedure is the specific way in which a threat actor implements a specific technique or sub-technique. One procedure can expand into multiple techniques and sub-techniques too. For example, if a threat actor uses the PowerShell sub-technique to gather system information, then they're also implementing the Command and Scripting Interpreter technique and other Discovery techniques, depending on the type of information that they are trying to gather. Let's imagine that an adversary is running something like ipconfig /all >ipconfig.txt in order to save TCP/IP network configuration values to a text file. The command that runs in the PowerShell Interpreter is the specific procedure that's implemented by the adversary for the Discovery tactic, the Command and Scripting Interpreter technique, and the PowerShell sub-technique. We'll see more examples of this in the Testing yourself section.
+The ATT&CK Matrix
+
+Now, let's take a look at the ATT&CK Matrix. It's important to understand how the Matrix is structured and how to navigate through it in order to better identify the behaviors we are interested in. Please bear in mind that the Matrix covers a lot of content, which makes it really big. To get a better look at the ATT&CK Matrix, please refer to https://attack.mitre.org/matrices/enterprise/:
+Figure 4.1 – ATT&CK Enterprise Matrix
+
+Figure 4.1 – ATT&CK Enterprise Matrix
+
+Here, we can see that the tactics are the column headings and that the techniques are listed after them. The columns have gray buttons that expand the sub-techniques for that specific technique:
+Figure 4.2 – Example of a sub-technique (ATT&CK Matrix – April 7, 2020)
+
+Figure 4.2 – Example of a sub-technique (ATT&CK Matrix – April 7, 2020)
+
+All the technique pages follow the same pattern: the technique's name, a list of sub-techniques, a description of the technique, the scorecard that the platforms operate on, and the main data sources for finding that type of activity:
+Figure 4.3 – ATT&CK technique page example
+
+Figure 4.3 – ATT&CK technique page example
+
+This is followed by a list of mitigations that could be implemented to prevent the technique, along with detection recommendations.
+
+All this information makes ATT&CK an excellent resource for planning blue and red teaming exercises, studying threat actors, crafting your own threat hunting plan, mapping defensive controls, or even a means for studying cybersecurity concepts.
+
+Now, let's take a look at one of the best tools out there for working with the ATT&CK Matrix in an interactive way: the ATT&CK Navigator.
+The ATT&CK Navigator
+
+The last ATT&CK tool we are going to review before digging into the practical exercise is the ATT&CK Navigator. This tool is a great instrument for visualizing a threat actor's modus operandi, the behavior of a specific tool, or to generate a security exercise. You can access the Navigator by going to https://mitre-attack.github.io/attack-navigator/enterprise/.The ATT&CK Navigator preloads the mapping for the tools and groups that are available on the ATT&CK web page, as shown here:
+Figure 4.3 – ATT&CK technique page example
+
+Figure 4.4 – ATT&CK APT28 coverage example
+
+You can create as many layers as you want, as well as combine them to study the overlapping between tools or threat actors by giving them a score and adding them to a new layer. First, you will have to select the techniques that you want to set a score for, as shown in the following screenshot:
+Figure 4.5 – Setting the scores in ATT&CK Navigator
+
+Figure 4.5 – Setting the scores in the ATT&CK Navigator
+
+Then, you can add two or more layers together in the New Layer panel:
+Figure 4.6 – Adding scores in ATT&CK Navigator
+
+Figure 4.6 – Adding scores in the ATT&CK Navigator
+
+This will give us a result something similar to the following, where the red squares are the ones belonging to the adversary called OilRig, the yellow ones represent techniques used by the adversary MuddyWater, and a combination of both (the green squares) represents the techniques that are used by both groups:
+Figure 4.7 – OilRig and MuddyWater overlap example
+
+Figure 4.7 – OilRig and MuddyWater overlap example
+
+Now that we have gone over the basics of the framework, let's proceed and map an intelligence report to provide an example of its use.
+Mapping with ATT&CK
+
+In the following exercise, we are going to use a paper that was presented at Virus Bulletin 2018: Inside Formbook Infostealer by the malware researcher Gabriela Nicolao: https://www.virusbulletin.com/uploads/pdf/magazine/2018/VB2018-Nicolao.pdf.
+
+Formbook is an infostealer that has been around since at least 2016 and has been advertised in hacking forums by the user ng-Coder. Its code is written in assembler inline instruction within C code (ASM C). It has been used in several campaigns that have impacted both the US and South Korea, and is also related to some threat actors, such as SWEED and Cobalt.
+
+In this section, we are going to learn how to map Formbook's infostealer behavior with ATT&CK.
+
+Important Note
+
+Gabriela Nicolao is a systems engineer from Argentina's Universidad Tecnológica Nacional (UTN), where she also teaches. In addition, she has a postgraduate degree in cryptography and teleinformatics security from Escuela Superior Técnica de la Facultad del Ejército and is currently attaining a Cyberdefense master's degree. She is a manager in Deloitte Argentina's Cyber Threat Intelligence area, where she uses her skills as a malware analyst, incident responder, and indicators of compromise hunter.
+
+She has been a speaker at several conferences around the world, including Kaspersky Latam Summit in 2019, Virus Bulletin in 2018 and 2019, the OSINT Latam Conference in 2019, !PinkCon in 2018, Segurinfo, Argentina's ICS Security Summit, and the VII Information Security and Cybersecurity National Encounter in 2019.
+
+She also participates in the online learning platform MiriadaX, where she provides a free malware analysis course completely in Spanish: https://miriadax.net/web/introduccion-al-analisis-del-malware-en-windows/inicio.
+
+The first paragraph of Gabriela's paper states the following:
+
+"Formbook [1] is an infostealer […] more advanced than a keylogger as it can retrieve authorization and login credentials from a web data form before the information reaches a secure server, bypassing HTTPS encryption. Formbook is effective even if the victims use a virtual keyboard, auto-fill, or if they copy and paste information to fill the form. The author of Formbook affirms that it is "browser-logger software", also known as form-grabbing software. Formbook offers a PHP panel, where the buyers can track their victims' information, including screenshots, keylogged data, and stolen credentials."
+
+From this first paragraph, we can gather a lot of information about what this infostealer is capable of. Let's highlight those sentences that describe a certain behavior:
+
+Formbook [1] is an infostealer […] more advanced than a keylogger as it can retrieve authorization and login credentials from a web data form before the information reaches a secure server, bypassing HTTPS encryption. Formbook is effective even if the victims use a virtual keyboard, auto-fill, or if they copy and paste information to fill the form. The author of Formbook affirms that it is "browser-logger software", also known as form-grabbing software. Formbook offers a PHP panel, where the buyers can track their victims' information, including screenshots, keylogged data, and stolen credentials.
+
+Let's organize this into a list and try to figure out which ATT&CK tactics they belong to:
+
+    Steal authorization and login credentials: Credential Access
+    Keylog information even if victims use a virtual keyboard, auto-fill, or if they copy and paste: Collection
+    Take screenshots: Collection
+
+    Once you've identified the tactic, the next thing you need to do is look up which technique or sub-technique best describes this behavior. You can do this with the help of the ATT&CK Matrix. Let's take a look at the Credential Access column:
+
+Figure 4.8 – Credential Access column
+
+Figure 4.8 – Credential Access column
+
+Here, we can see that we have two techniques that might be useful to describe this behavior: T1555 – Credentials from Password Stores and its sub-technique, T1555.003 – Credentials from Web Browsers; and T1056 – Input Capture and its sub-technique, T1056.001 – Keylogging.
+
+If we repeat this process for each of the tactics detected, we will come up with something like this:
+
+    Steal authorization and login credentials: Credential Access:
+
+    a) T1555 – Credentials from Password Stores
+
+    i) T1555.003 – Credentials from Web Browsers
+
+    b) T1056 – Input Capture
+
+    i) T1056.001 – Keylogging
+    Keylog information, even if victims use a virtual keyboard, auto-fill, or if they copy and paste: Collection:
+
+    a) T1056 – Input Capture
+
+    i) T1056.001 – Keylogging
+    Take screenshots: Collection:
+
+    a) T1113 – Screen Capture
+
+Now that we have covered how to determine the threat actor's behaviors and the related ATT&CK techniques, go ahead and test yourself with the following exercise.
+Testing yourself
+
+In this section, you are going to repeat the exercise we did previously, but you are going to complete it all by yourself. First, you are going to use a paragraph with the behavior you should identify highlighted by me. Then, you are going to repeat the exercise without any guided help.
+
+To complete this exercise, you will need to have access to the ATT&CK website: https://attack.mitre.org/.
+
+Tip
+
+Look for keywords in the text such as persistence, execute, gather, and send that could help you identify the type of behavior the author is talking about. You can also use the ATT&CK web search box to find other keywords, such as DLL, Windows API, Registry Key, and so on.
+
+Take a look at the ATT&CK Matrix to identify the corresponding tactics, techniques, and sub-techniques.
+
+A formgrabber injects a DLL (Dynamic Link Library) into a browser and monitors for calls to the HttpSendRequest API within WININET.DLL in order to intercept the data before encryption and send all requests to its own code, prior to sending the data onward. Andromeda (also known as Gamarue), Tinba, and Weyland-Yutani BOT are some malware families that use this technique.
+
+According to the user ng-Coder, Formbook boasts the following features:
+
+Coded in ASM/C (x86_x64)
+
+Startup (hidden)
+
+Full PE-injection (no DLL/no drop/both x86 and x64)
+
+Ring3 kit
+
+Bin is Balloon Executable (MPIE + MEE)
+
+Doesn't use suspicious Windows APIs
+
+No blind hook, all hooks are thread-safe, including the x64, so a crash is unlikely
+
+All communications with the panel are encrypted
+
+Install manager
+
+File browsing (FB Connect)
+
+Full Unicode support
+
+Formbook works as a botnet, infecting victims that are shown in a web panel in order to manage the information that is retrieved from them […].
+
+Each bot can receive the following commands from the C&C server:
+
+Download and execute
+
+Update
+
+Uninstall
+
+Visit URL
+
+Clear cookies
+
+Restart system
+
+Shut down system
+
+Force upload keystroke
+
+Take screenshot
+
+FB Connect (file browsing)
+
+Download and execute from FB Connect
+
+Update bin from FB Connect
+
+Formbook […] was distributed via PDFs with embedded links, DOC and XLS files with malicious macros, and compressed files containing the executable. This was also observed in 2018, distributed via emails with DOCX files that contained a URL […]. This URL downloaded an RTF file that exploits CVE-2017-8570 and drops an executable. This executable downloads the Formbook sample.
+
+Now, try this out without my help:
+
+The analysed sample is a RAR self-extracting archive (SFX) that contains several files […].
+
+The description to the right of the file shows the following strings:
+
+Path=%LocalAppData%\temp\cne
+
+Silent=1
+
+Update=UcE1U8
+
+Setup=axo.exe pwm-axa
+
+Files with a size below 1K contain a few strings that are probably used during decompression.
+
+After executing the SFX file, Formbook extracts the files in %LocalAppData%\temp\cne using CreateDirectoryW. It then deletes the SFX file. […]
+
+The axo.exe file is an AutoIt script that is executed with the pwm-axa file as a parameter.
+
+The script decrypts Formbook and loads it in memory. In order to do this, it creates a file with a random name that contains Formbook's functionality and deletes it soon after loading it in memory. This file contains 44 functions with obfuscated names.
+
+The sni.mp3 file includes interesting strings that were used during the execution […].
+
+The script changes the cne folder attributes to hide its content by executing the FileSetAttrib($cne_Folder_ Path, "+H") command.
+
+In order to remain persistent, it modifies the Run registry key with a new key named WindowsUpdate that instructs the execution of axo.exe, along with pwm-axa:
+
+If IsAdmin() Then
+
+RegWrite("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ Windows\CurrentVersion\Run", $WindowsUpdate, "REG_ SZ", $cne_Folder_Path & "\" & $axo.exe & " " & FileGetShortName(FileGetShortName($cne_Folder_Path & "\" & $pwm-axa)))
+
+Else
+
+RegWrite("HKEY_CURRENT_USER\SOFTWARE\Microsoft\ Windows\CurrentVersion\Run", $WindowsUpdate, "REG_ SZ", $cne_Folder_Path & "\" & $axo.exe & " " & FileGetShortName($cne_Folder_Path & "\" & $pwm-axa))
+
+RegWrite("HKCU64\Software\Microsoft\Windows\ CurrentVersion\Run", $WindowsUpdate, "REG_ SZ", $cne_Folder_Path & "\" & $axo.exe & " " & FileGetShortName($cne_Folder_Path & "\" & $pwm-axa))
+
+EndIf
+
+Sleep(1000)
+
+Sleep(1000)
+
+EndFunc
+
+The script tries to modify the following registry keys:
+
+RegWrite("HKCU64\Software\Microsoft\Windows\ CurrentVersion\Policies\System", "DisableTaskMgr", "REG_DWORD", "1")
+
+RegDelete("HKLM64\Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients")
+
+RegWrite("HKLM64\SOFTWARE\Microsoft\Windows\ CurrentVersion\Policies\System", "EnableLUA", "REG_DWORD", "0")
+
+And it:
+
+Disables Task Manager
+
+Turns off the system protection
+
+Disables UAC (User Account Controls)
+
+Formbook will terminate if it finds VMware or VirtualBox processes running in the victim's system and if the "D" drive has space of less than 1 MB:
+
+VMwaretray.exe
+
+Vbox.exe
+
+VMwareUser.exe
+
+VMwareService.exe
+
+VboxService.exe
+
+vpcmap.exe
+
+VBoxTray.exe
+
+If DriveSpaceFree ("d:\")
+
+Formbook will look for the svshost.exe process and terminate if it finds more than two svshost.exe processes running […].
+
+The script will check the HKCR\http\shell\open\command registry key to find out which internet browser the victim's machine uses by default.
+Answers
+
+The following is a list of all the techniques you should have found in the previous text. If you didn't find them all, do not worry – not only is the ATT&CK Matrix huge, but it's common to overlook some of the techniques that are intertwined. Even some threat intelligence teams have at least two analysts reviewing the mapping of the same report, since two minds bring different perspectives and it also helps them avoid omissions. But, in any case, remember: you can always keep practicing!
+
+Finally, you should also keep in mind that there isn't such a thing as a perfect threat report. Sometimes, the information is going to be vague or not detailed enough for you to be sure how to categorize it. The people that wrote the report most likely didn't write it for you to analyze it using ATT&CK and even if they did map the TTPs they found using ATT&CK, they might not share all the information regarding how they did come up with those TTPs with the public.
+
+In the following list, you will find all the TTPs I found for this report in order of appearance – even if they were repeated. In addition, I added a * every time the mapping technique that's listed is debatable. You can always investigate the Formbook malware further to clarify those items:
+
+    Defense Evasion & Privilege Escalation: T1055.001 – Process Injection: Dynamic-link Library Injection
+    Collection & Credential Access: T1056.004 – Input Capture: Credential API Hooking
+    Defense Evasion & Privilege Escalation: T1055.002 – Process Injection: Portable Executable Injection
+    Collection & Credential Access: T1056.004 – Input Capture: Credential API Hooking*
+
+    a. Referring to the line: "No blind hook, all hooks are thread-safe, including the x64, so a crash is unlikely".
+    Command and Control: T1573 – Encrypted Channel
+    Discovery: T1083 – File and Directory Discovery
+    Execution: T1059 – Command and Scripting Interpreter*
+
+    a. Referring to the line: "Receive the following commands from the C&C server." It is not clearly stated how the commands were executed.
+    Defense Evasion: T1551 – Indicator Removal on Host
+    Command and Control: T1102 – Web Service*
+
+    a. Referring to the bullet point: "Visit URL." If the URL that's called is C2, this technique would apply.
+    Impact: T1529 – System Shutdown/Reboot*
+
+    a. Although Formbook is capable of shutting down and rebooting the system, this capability might be used not to create an impact, but for other reasons.
+    Collection: T1513 – Screen Capture
+    Initial Access: T1566.001 – Phishing: Spearphishing Attachment*
+
+    a. The paragraph states that one of Formbook's spreading mechanisms is done through files with malicious macros. It is not clearly stated, as it is further on with the spearphishing link on an emailed file, that those files were sent as spearphishing attachments, but since this is one of the preferred initial access vectors by most threat actors, it is, in fact, highly likely.
+    Initial Access: T1566.001 – Phishing: Spearphishing Link
+    Execution: T1204.001 – User Execution: Malicious Link
+    Execution: T1204.002 – User Execution: Malicious File
+    Defense Evasion: T1027.002 – Obfuscated Files or Information: Software Packing
+    Defense Evasion: T1551.004 – Indicator Removal on Host: File Deletion
+    Defense Evasion & Privilege Escalation: T1055- Process Injection
+    Defense Evasion: T1551.004 – Indicator Removal on Host: File Deletion
+    Defense Evasion: T1027.002 – Obfuscated Files or Information: Software Packing
+    Defense Evasion: T1564 – Hide Artifacts: Hidden Files and Directories
+    Execution: T1059 – Command and Scripting Interpreter
+    Persistence & Privilege Escalation: T1547.001 – Boot or Logon Autostart Execution: Registry Run Keys/Startup Folder
+    Defense Evasion: T1497.003 – Virtualization/Sandbox Evasion: Time Based Evasion
+    Defense Evasion: T1112 – Modify Registry
+    Defense Evasion: T1562.001 – Impair Defenses: Disable or Modify Tools
+    Defense Evasion & Privilege Escalation: T1548.002 – Abuse Elevation Control Mechanism: Bypass User Access Control
+    Defense Evasion: T1497.001 – Virtualization/Sandbox Evasion: System Checks
+    Discovery: T1120 – Peripheral Device Discovery
+    Defense Evasion: T1497.001 – Virtualization/Sandbox Evasion: System Checks
+    Discovery: T1424 – Process Discovery
+    Discovery: T1518 – Software Discovery
+
+Summary
+
+Now that you've completed this chapter, you should be able to carry out your own analysis using the MITRE ATT&CK Framework. Being comfortable with the framework will prove really useful for the following chapters, where we are going to plan and execute our hunts. In the next chapter, we are going to learn how to map our data sources using ATT&CK, as well as the importance of creating data dictionaries.
